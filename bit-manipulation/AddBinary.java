@@ -27,6 +27,7 @@ public class AddBinary {
         if (aLen > bLen) {
             int diff = aLen - bLen;
             String preStr = new String();
+            // StringBuilder
             for (int i = 0; i < diff; i++) {
                 preStr += "0";
             }
