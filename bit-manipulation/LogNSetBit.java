@@ -1,52 +1,24 @@
 public class LogNSetBit {
     public static void main(String args[]) {
-        System.out.println(getSetBits(3));
+        System.out.println(getSetBits(31));
     }
 
     public static int getSetBits(int A) {
-        int rows= getTotalBits(A);
-
-        for (int i = rows - 1; i >= 0; i--) {
-            int power = 0;
-            while (power < A) {
-                power = power << 1;
+        long val1,val2,cnt;
+        cnt = 0;
+        for (int i = 1; i < 32; i++) {
+            val1 = (int)((A+1)/Math.pow(2, i));
+            val2 = (int)((A+1)%Math.pow(2, i));
+            if (val2>Math.pow(2, i-1)) {
+                val2 = val2 - (int)(Math.pow(2, i-1));
+            } else {
+                val2 = 0;
             }
+                
+            cnt = cnt + (int)(val1*Math.pow(2, i-1)) + val2;
         }
+        return (int)(cnt%1000000007);
     }
-    
-
-
-
-
-
-
-    // public static int getSetBits(int A) {
-    //     int i = 0;
-    //     int result = 0;
-    //     System.out.print(1<<i);
-    //     while ((1 << i) <= A) {
-    //         boolean k = false;
-
-    //         int change = 1 << i;
-
-    //         for (int j = 0; j <= A; j++) {
-    //             if (k == true) {
-    //                 result+=1;
-    //             } else {
-    //                 result+=0;
-    //             }
-    //             if (change == 1) {
-    //                 k = !k;
-    //                 change = 1 << i;
-    //             } else {
-    //                 change--;
-    //             }
-    //         }
-    //         i++;
-    //     }
-
-    //     return result;
-    // }
 
     public static int getTotalBits(int A) {
         int count = 0;
