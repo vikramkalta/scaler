@@ -74,11 +74,6 @@ public class IsDictionary {
                         } else {
                             continue;
                         }
-
-                        // if (x == iLen - 1) {
-                        //     x = 0;
-                        //     t++;
-                        // }
                     }
 
                     if (!isOrdered) {
@@ -92,13 +87,6 @@ public class IsDictionary {
                 }
                 prev = orderOfChar;
                 i = (i % aLen) + 1;
-
-                // if (i == aLen && j < minStrLen - 1) {
-                //     // Reset prev to 0;
-                //     prev = 0;
-                //     i = 0;
-                //     j++;
-                // }
             }
 
         } while (i < aLen);
