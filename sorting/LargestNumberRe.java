@@ -36,7 +36,7 @@ public class LargestNumberRe {
             AStr[i]= currStr;
         }
 
-        Arrays.sort(AStr, new LargerNumberComparator());
+        // Arrays.sort(AStr, new LargerNumberComparator());
 
         if (AStr[0].equals("0")) {
             return "0";
