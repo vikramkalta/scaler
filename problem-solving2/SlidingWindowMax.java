@@ -62,7 +62,8 @@ public class SlidingWindowMax {
                     
                 } else {
                     max = curr;
-                    slidingWindow.remove(0);
+                    // slidingWindow.remove(0);
+                    slidingWindow.clear();
                     slidingWindow.add(curr);
                     result.add(max);
                 }
