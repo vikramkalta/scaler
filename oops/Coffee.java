@@ -188,11 +188,6 @@ public class Coffee {
 }
 
 class Beverage {
-  private int sugar = 0;
-  private int cream = 0;
-  private int coffee = 0;
-  private int milk = 0;
-  private int chocolate = 0;
   private int sugarCost = 25;
   private int creamCost = 25;
   private int coffeeCost = 75;
@@ -230,51 +225,6 @@ class Beverage {
     }
   }
 
-  public int getSugar() {
-    return sugar;
-  }
-
-  public void setSugar() {
-    sugar++;
-    sugarCost *= sugar;
-  }
-
-  public int getCream() {
-    return cream;
-  }
-
-  public void setCream() {
-    cream++;
-    creamCost *= cream;
-  }
-
-  public int getCoffee() {
-    return coffee;
-  }
-
-  public void setCoffee() {
-    coffee++;
-    coffeeCost *= coffee;
-  }
-
-  public int getMilk() {
-    return milk;
-  }
-
-  public void setMilk() {
-    milk++;
-    milkCost *= milk;
-  }
-
-  public int getChocolate() {
-    return chocolate;
-  }
-
-  public void setChocolate() {
-    chocolate++;
-    chocolateCost *= chocolate;
-  }
-
   public int getSugarCost() {
     return sugarCost;
   }
@@ -293,10 +243,6 @@ class Beverage {
 
   public int getChocolateCost() {
     return chocolateCost;
-  }
-
-  public int getTotalCost() {
-    return sugarCost + creamCost + coffeeCost + milkCost + chocolateCost;
   }
 
   public ArrayList<String> getIngredients() {
