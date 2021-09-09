@@ -2,28 +2,69 @@ import java.util.ArrayList;
 
 public class ThreeSum {
     public static void main(String args[]) {
-        int[] arr = { -1, 2, 1, -4 };
-        // int[] arr = { -5, 1, 4, -7, 10, -7, 0, 7, 3, 0, -2, -5, -3, -6, 4, -7, -8, 0,
-        // 4, 9, 4, 1, -8, -6, -6, 0, -9, 5,
-        // 3, -9, -5, -9, 6, 3, 8, -10, 1, -2, 2, 1, -9, 2, -3, 9, 9, -10, 0, -9, -2, 7,
-        // 0, -4, -3, 1, 6, -3 };
-        // int[] arr = { 4, 7, -4, 2, 2, 2, 3, -5, -3, 9, -4, 9, -7, 7, -1, 9, 9, 4, 1,
-        // -4, -2, 3, -3, -5, 4, -7, 7, 9, -4,
-        // 4, -8 };
-        // int[] arr = { -10, -10, -10 };
-        // int[] arr = { -7, -6, 7, 10, -1, -9, -8, 7, -5, -4, -4, 1, 6, 5, 7, 1, 3, -2,
-        // 9, -8, -6, -9, -4, -5 };
+        // int[] arr = { -1, 2, 1, -4 };
+        // int[]arr = {1, 2, 3};
+        // int[] arr = {5, -2, -1, -10, 10};
+        // int[]arr = {-6, 1, -4, -1, 8, -4, 9, 0, -3, 7, -3, 2, -4, -2, 3, -4, 10, 0, 9, 6, 1, 3, 4, 2};
+        // int[]arr = {-3, 7, -3, 2, -4, -2, 3};
+        int[] arr = {-5, 1, 4, -7, 10, -7, 0, 7, 3, 0, -2, -5, -3, -6, 4, -7, -8, 0, 4, 9, 4, 1, -8, -6, -6, 0, -9, 5, 3, -9, -5, -9, 6, 3, 8, -10, 1, -2, 2, 1, -9, 2, -3, 9, 9, -10, 0, -9, -2, 7, 0, -4, -3, 1, 6, -3};
         ArrayList<Integer> A = new ArrayList<>();
         for (int i = 0; i < arr.length; i++)
             A.add(arr[i]);
-        System.out.println(solve(A, 1));
-        // System.out.println(solve(A, -1));
+        // System.out.println(solve(A, 1));
+        // System.out.println(solve(A, 6));
+        // System.out.println(solve(A, 5));
+        System.out.println(solve(A, -1));
         // System.out.println(solve(A, -3));
         // System.out.println(solve(A, -5));
         // System.out.println(solve(A, -2));
     }
 
     public static int solve(ArrayList<Integer> A, int B) {
+        int len = A.size();
+        merge(A, 0, len - 1);
+
+        int minDiff = Integer.MAX_VALUE;
+        int ans = 0;
+
+        for (int i = 0; i < len; i++) {
+            int currI = A.get(i);
+            int start = i + 1, end = len - 1;
+            // 5, -2, -1, -10, 10
+            // -10, -2, -1, 5, 10
+            // -4,-3,-3,-2,2,3,7
+            int x = Math.abs(currI - B);
+            // System.out.println("x:" +x);
+            while (start < end) {
+                int currStart = A.get(start);
+                int currEnd = A.get(end);
+                
+                int y = currStart + currEnd;
+                // System.out.println("y:"+y);
+                int sum = currI + currStart + currEnd;
+                int diff = Math.abs(sum - B);
+                if (minDiff > diff) {
+                    minDiff = diff;
+                    // System.out.println("x" +currI + " y "  + currStart + " z " + currEnd);
+                    System.out.println("diff: " + diff);
+                    System.out.println("i:" + i + " s:" + start + " e:" + end + " sum: " + sum);
+                    // System.out.println("x" +currI + " y "  + currStart + " z " + currEnd);
+                    ans = sum;
+                }
+                if (y == x) {
+                    break;
+                } else if (y > x) {
+                    end--;
+                } else {
+                    start++;
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    public static int solve2(ArrayList<Integer> A, int B) {
         int len = A.size();
 
         int x = 0, y = 1, z = 2;
