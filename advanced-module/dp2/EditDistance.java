@@ -1,90 +1,60 @@
+import java.util.ArrayList;
+
 public class EditDistance {
     public static void main(String args[]) {
-        String A = "abcd";
-        String B = "bcad";
-        // StringBuilder a = new StringBuilder("1");StringBuilder b = new
-        // StringBuilder("1");
-        // System.out.println(a.toString().equals(b.toString()));
+        // String A = "abcd";
+        // String B = "bcad";
+        // String A = "abad";
+        // String B = "abac";
+        // String A = "Anshuman";
+        // String B = "Antihuman";
+        String A = "bbbaabaa";
+        String B = "aababbabb";
         System.out.println(solve(A, B));
     }
 
     public static int solve(String A, String B) {
-        // StringBuilder a = new StringBuilder(A);
-        // StringBuilder b = new StringBuilder(B);
-        // int max = Integer.MIN_VALUE;
-        int ans = getEditDist(A,B,A.length()-1,B.length()-1,0);
-        return ans;
-    }
-
-    public static int getEditDist(String A, String B, int i, int j, int ans) {
-        // Base case
         if (A.equals(B)) {
             return 0;
         }
+        int lenA = A.length();
+        int lenB = B.length();
+        ArrayList<ArrayList<Integer>> dp = new ArrayList<>();
+        for (int i = 0; i < lenA; i++) {
+            ArrayList<Integer> innerArr = new ArrayList<>();
+            for (int j = 0; j < lenB; j++) {
+                // innerArr.add(Integer.MAX_VALUE);
+                innerArr.add(-1);
+            }
+            dp.add(innerArr);
+        }
+        int ans = getEditDist(A, B, A.length() - 1, B.length() - 1, dp);
+        return ans;
+    }
+
+    public static int getEditDist(String A, String B, int i, int j, ArrayList<ArrayList<Integer>> dp) {
+        // Base case
         if (j < 0) {
             return i + 1;
         }
         if (i < 0) {
             return j + 1;
         }
-        
+        int curr = dp.get(i).get(j);
+        if (curr > -1) {
+            return curr;
+        }
+        int ans = 0;
         if (A.charAt(i) == B.charAt(j)) {
-            ans = getEditDist(A, B, i - 1, j - 1, ans);
+            ans = getEditDist(A, B, i - 1, j - 1, dp);
         } else {
-            int x = getEditDist(A, B, i, j - 1, ans); // add
-            int y = getEditDist(A, B, i - 1, j, ans); // delete
-            int z = getEditDist(A, B, i - 1, j - 1, ans); // replace
-            // ans = Math.min(getEditDistance(A, B, i, j, ans), getEditDistance(A, B, i, j, ans));
+            int x = 1 + getEditDist(A, B, i, j - 1,  dp); // add
+            int y = 1 + getEditDist(A, B, i - 1, j,  dp); // delete
+            int z = 1 + getEditDist(A, B, i - 1, j - 1, dp); // replace
             int min = Math.min(x, y);
-            ans += Math.min(min, z);
+            ans = Math.min(min, z);
         }
+        dp.get(i).set(j, ans);
         return ans;
-    }
-
-    public static int getEditDistance(StringBuilder A, StringBuilder B, String ogA, String ogB, int ans) {
-        if (A.toString().equals(B.toString())) {
-            A = new StringBuilder(ogA);
-            B = new StringBuilder(ogB);
-            return ans;
-        }
-        int lenA = A.length();
-        int lenB = B.length();
-        if (lenA > 0 && lenB > 0 && A.charAt(lenA - 1) == B.charAt(lenB - 1)) {
-            StringBuilder a = A.deleteCharAt(lenA - 1);
-            StringBuilder b = B.deleteCharAt(lenB - 1);
-            ans = getEditDistance(a, b, ogA, ogB, ans);
-        } else {
-            if (lenB > 0) {
-                // insert
-                StringBuilder insertedStr = add(A, B);
-                ans = getEditDistance(insertedStr, B, ogA, ogB, ans + 1);
-                // replace
-                StringBuilder replacedStr = replace(A, B);
-                ans = getEditDistance(replacedStr, B, ogA, ogB, ans + 1);
-            } else {
-                // delete
-                StringBuilder deletedStr = delete(A);
-                ans = getEditDistance(deletedStr, B, ogA, ogB, ans + 1);
-            }
-        }
-        return ans;
-    }
-
-    public static StringBuilder add(StringBuilder A, StringBuilder B) {
-        char bEnd = B.charAt(B.length() - 1);
-        A.append(bEnd);
-        return A;
-    }
-
-    public static StringBuilder replace(StringBuilder A, StringBuilder B) {
-        char bEnd = B.charAt(B.length() - 1);
-        A.deleteCharAt(A.length() - 1);
-        A.append(bEnd);
-        return A;
-    }
-
-    public static StringBuilder delete(StringBuilder A) {
-        A.deleteCharAt(A.length() - 1);
-        return A;
     }
 }
