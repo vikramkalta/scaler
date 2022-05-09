@@ -3,19 +3,56 @@ import java.util.ArrayList;
 public class DungeonPrincess {
     public static void main(String args[]) {
         // int[][] arr = { { -2, -3, 3 }, { -5, -10, 1 }, { 10, 30, -5 } };
-        int[][] arr = {{1, -1, 0},{-1, 1, -1},{1, 0, -1}};
-        ArrayList<ArrayList<Integer>> A = new ArrayList<>();
-        for (int i = 0; i < arr.length; i++) {
-            ArrayList<Integer> innerArr = new ArrayList<>();
-            for (int j = 0; j < arr[i].length; j++) {
-                innerArr.add(arr[i][j]);
-            }
-            A.add(innerArr);
-        }
+        int[][] A = {{1, -1, 0},{-1, 1, -1},{1, 0, -1}};
+        // ArrayList<ArrayList<Integer>> A = new ArrayList<>();
+        // for (int i = 0; i < arr.length; i++) {
+        //     ArrayList<Integer> innerArr = new ArrayList<>();
+        //     for (int j = 0; j < arr[i].length; j++) {
+        //         innerArr.add(arr[i][j]);
+        //     }
+        //     A.add(innerArr);
+        // }
         System.out.println(solve(A));
     }
 
-    public static int solve(ArrayList<ArrayList<Integer>> A) {
+    public static int solve(int[][] dungeon) {
+        int rows = dungeon.length;
+        int cols = dungeon[0].length;
+        int originalStart = dungeon[0][0];
+
+        for (int i = rows - 2; i >= 0; i--) {
+            dungeon[i][cols - 1] = dungeon[i + 1][cols - 1] + dungeon[i][cols - 1];
+        }
+        for (int i = cols - 2; i >= 0; i--) {
+            dungeon[rows - 1][i] = dungeon[rows - 1][i + 1] + dungeon[rows - 1][i];
+        }
+
+        for (int i = rows - 2; i >= 0; i--) {
+            for (int j = cols - 2; j >= 0; j--) {
+                int rightSum = dungeon[i][j] + dungeon[i][j + 1];
+                int bottomSum = dungeon[i][j] + dungeon[i + 1][j];
+                if (Math.abs(rightSum) > Math.abs(bottomSum)) {
+                    dungeon[i][j] = bottomSum;
+                } else if (Math.abs(rightSum) == Math.abs(bottomSum)) {
+                    dungeon[i][j] = Math.max(bottomSum, rightSum);
+                } else {
+                    dungeon[i][j] = rightSum;
+                }
+            }
+        }
+        int ans = 0;
+        if (dungeon[0][0] < 0) {
+            ans = Math.abs(dungeon[0][0]) + 1;
+        } else if (dungeon[0][0] == 0) {
+            ans = Math.abs(originalStart) + 1;
+        } else {
+            ans = originalStart < 0 ? Math.abs(originalStart) + 1 : 1;
+        }
+        // return dungeon[0][0] < 0 ? Math.abs(dungeon[0][0]) + 1 : 1;
+        return ans;
+    }
+
+    public static int solve1(ArrayList<ArrayList<Integer>> A) {
         int rows = A.size();
         int cols = A.get(0).size();
         ArrayList<ArrayList<Integer>> dp = new ArrayList<>();

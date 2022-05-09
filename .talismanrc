@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: advanced-module/dp1/WaysToDecode.java
+  checksum: 10d7f08d7578788fd08d0c9b033f8da65e15c882cf81b75fe54a1f377400d2f9
+version: ""
