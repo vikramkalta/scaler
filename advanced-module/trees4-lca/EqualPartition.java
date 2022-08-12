@@ -27,40 +27,45 @@ public class EqualPartition {
         root.left.right = new TreeNode(6);
         root.right.left = new TreeNode(5);
         root.right.right = new TreeNode(6);
+        // TreeNode root = new TreeNode(5);
+        // root.left = new TreeNode(3);
+        // root.right = new TreeNode(7);
+        // root.left.left = new TreeNode(4);
+        // root.left.right = new TreeNode(6);
+        // root.right.left = new TreeNode(5);
+        // root.right.right = new TreeNode(6);
         System.out.println(solve(root));
     }
+    public static int equalCount = 0;
     public static int solve(TreeNode A) {
-        HashMap<Integer, Integer> sumMap = new HashMap<>();
-        int sum = sum(A, sumMap);
-        if (sum % 2 != 0) {
-            return 0;
-        }
-        int halfSum = sum / 2;
-        if (sumMap.containsKey(halfSum)) {
-            return 1;
-        }
-        return 0;
+        long sum = sum(A);
+        checkSum(A, sum / 2l);
+        return equalCount == 2 ? 1 : 0;
     }
-    public static int sum(TreeNode A, HashMap<Integer, Integer> sumMap) {
+
+    public static long checkSum(TreeNode A, long halfSum) {
         if (A == null) {
-            return 0;
+            return 0l;
         }
-        int left = sum(A.left, sumMap);
-        int right = sum(A.right, sumMap);
-        sumMap.put(left + right + A.val, 1);
-        return left + right + A.val;
+        long _sum = A.val * 1l;
+        long x = checkSum(A.left, halfSum);
+        long y = checkSum(A.right, halfSum);
+        _sum = _sum + x + y;
+        if (_sum == halfSum) {
+            equalCount++;
+            _sum = 0;
+        }
+        return _sum;
     }
-    
-    // public static void sumLeft(TreeNode A, int halfSum) {
-    //     if (A == null) {
-    //         return;
-    //     }
-    //     runningSum += A.val;
-    //     if (runningSum == halfSum) {
-    //         isFound = 1;
-    //         return;
-    //     }
-    //     sumLeft(A.left, halfSum);
-    //     sumLeft(A.right, halfSum);
-    // }
+
+    public static long sum(TreeNode A) {
+        if (A == null) {
+            return 0l;
+        }
+        long _sum = A.val * 1l;
+        long x = sum(A.left);
+        long y = sum(A.right);
+        _sum = _sum + x + y;
+        return _sum;
+    }
 }

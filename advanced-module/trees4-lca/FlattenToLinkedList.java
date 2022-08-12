@@ -16,7 +16,7 @@ public class FlattenToLinkedList {
         root.right = new TreeNode(5);
         root.left.left = new TreeNode(3);
         root.left.right = new TreeNode(4);
-        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(6);
         // root.right.right = new TreeNode(7);
         // TreeNode root = new TreeNode(5);
         // root.left = new TreeNode(3);
@@ -30,21 +30,59 @@ public class FlattenToLinkedList {
         System.out.println();
     }
     
-    public static TreeNode prev;
-    public static void flatten(TreeNode root) {
-        prev = new TreeNode(root.val);
-        preOrder(root);
+    public static TreeNode flatten(TreeNode a) {
+        TreeNode temp = new TreeNode(-1);
+        TreeNode ans = temp;
+        Stack s = new Stack(100000);
+        leftTraverser(a, s, temp);
+        return ans.right;
     }
-    public static void preOrder(TreeNode root) {
+    public static void leftTraverser(TreeNode root, Stack s, TreeNode temp) {
         if (root == null) {
+            while (!s.isEmpty()) {
+                TreeNode top = s.pop();
+                if (top.right != null) {
+                    leftTraverser(top.right, s, temp);
+                }
+            }
             return;
         }
-        if (prev != root) {
-            prev.left = null;
-            prev.right = root;
-            prev = prev.right;
+        s.push(root);
+        temp.left = null;
+        temp.right = new TreeNode(root.val);
+        leftTraverser(root.left, s, temp.right);
+    }
+    
+    static class Stack {
+        int len = 0;
+        int top = -1;
+        TreeNode[] stack;
+        Stack(int n) {
+            len = n;
+            stack = new TreeNode[n];
         }
-        preOrder(root.left);
-        preOrder(root.right);
+        public void push(TreeNode n) {
+            if (isFull()) {
+                System.out.println("err push");
+                System.exit(1);
+            }
+            top++;
+            stack[top]=n;
+        }
+        public TreeNode pop() {
+            if (isEmpty()) {
+                System.out.println("err pop");
+                System.exit(1);
+            }
+            TreeNode temp = stack[top];
+            top--;
+            return temp;
+        }
+        public boolean isEmpty() {
+            return top == -1;
+        }
+        public boolean isFull() {
+            return top == len - 1;
+        }
     }
 }
