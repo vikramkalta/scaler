@@ -106,12 +106,3 @@ public class SortedPermutationRank {
         }
     }
 }
-
-class Queue {
-    int start = -1;
-    int end = 0;
-
-    Queue() {
-
-    }
-}
