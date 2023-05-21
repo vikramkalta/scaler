@@ -1,3 +1,4 @@
+package string;
 public class RotateString {
     public static void main(String args[]) {
         // String A = "scaler";

@@ -1,3 +1,4 @@
+package string;
 import java.util.ArrayList;
 
 public class IsAlpha {
