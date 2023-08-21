@@ -1,3 +1,4 @@
+package recursion;
 public class Sudoku {
     public static void main(String args[]) {
         char[][] A = {
@@ -14,7 +15,6 @@ public class Sudoku {
         try {
             solveSudoku(A);
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println();
         }
         System.out.println();

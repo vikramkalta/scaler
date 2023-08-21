@@ -1,3 +1,4 @@
+package recursion;
 public class AnotherSequence {
     public static void main(String args[]) {
         int x = solve(3);

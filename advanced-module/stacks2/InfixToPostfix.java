@@ -78,7 +78,7 @@ public class InfixToPostfix {
     }
 
     public static String solve1(String A) {
-        Stack<StringBuilder> stack = new Stack<>();
+        // Stack<StringBuilder> stack = new Stack<>();
         StringBuilder ans = new StringBuilder();
         int i = 0;
         int len = A.length();

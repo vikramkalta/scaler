@@ -31,7 +31,6 @@ public class MakeThemEqual {
         }
         int i = 0;
         int count = 0;
-        boolean isEqual = true;
         while (i < len) {
             int curr = A.get(i);
             while (curr > min) {
@@ -44,7 +43,6 @@ public class MakeThemEqual {
             A.set(i, curr);
 
             if (i > 0 && curr != A.get(i - 1)) {
-                isEqual = false;
                 i = 0;
             } else {
                 i++;

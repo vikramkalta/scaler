@@ -1,3 +1,4 @@
+package recursion;
 import java.util.ArrayList;
 
 public class GrayCode {

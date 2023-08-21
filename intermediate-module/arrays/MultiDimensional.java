@@ -1,5 +1,4 @@
-// using namespace arrays;
-
+package arrays;
 public class MultiDimensional {
     public static void main(String args[]) {
         // declaring and initialising 2D array

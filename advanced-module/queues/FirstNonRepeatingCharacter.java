@@ -16,8 +16,6 @@ public class FirstNonRepeatingCharacter {
         StringBuilder B = new StringBuilder();
         HashMap<Character, Boolean> hm = new HashMap<>();
         Queue4 q = new Queue4(len);
-        Queue4 q1 = new Queue4(len);
-        
         for (int i = 0; i < len; i++) {
             char curr = A.charAt(i);
             if (!hm.containsKey(curr)) {

@@ -10,9 +10,9 @@ public class CountOfDigit1 {
             return 1;
         }
 
-        int count1 = A / 10;
-        int count2 = 9 * 2;
-        int count3 = A < 200 ? A - 100 : 99;
+        // int count1 = A / 10;
+        // int count2 = 9 * 2;
+        // int count3 = A < 200 ? A - 100 : 99;
 
         while (A > 10) {
             countOf1++;

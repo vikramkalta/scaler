@@ -113,7 +113,6 @@ public class DiskSpaceAnalysis {
             return size == length;
         }
         public int getMin() {
-            int abs = Math.abs(rear - front);
             int i = 0;
             int currIndex = front;
             int min = Integer.MAX_VALUE;

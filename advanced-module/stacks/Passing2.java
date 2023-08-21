@@ -9,7 +9,7 @@ public class Passing2 {
     }
 
     public static int solve(int A, int B, int[] C) {
-        Stack stack = new Stack<>();
+        Stack<Integer> stack = new Stack<>();
         stack.push(B);
         for (int i = 0; i < C.length; i++) {
             if (C[i] != 0) {

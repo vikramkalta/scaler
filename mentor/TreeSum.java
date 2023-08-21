@@ -144,7 +144,7 @@ public class TreeSum {
         ArrayList<Integer> A = new ArrayList<>();
         for (int i = 0; i < a.length; i++)
             A.add(a[i]);
-        ArrayList<Integer> B = new ArrayList<>();
+        // ArrayList<Integer> B = new ArrayList<>();
         TreeNode x = levelOrder(A);
         // System.out.println(hasPath(x, 10));
         int[] b = new int[a.length];

@@ -61,7 +61,6 @@ public class MaximumJobs {
 
     public static int solve(ArrayList<Integer> A, ArrayList<Integer> B) {
         int len = A.size();
-        int maxJobs = Integer.MIN_VALUE;
         merge(A, B, 0, len - 1);
         // for (int i = 0; i < len; i++) {
         // int jobs = 1;
